@@ -7,7 +7,7 @@ import os
 app = Flask(__name__)
 CORS(app)  # <-- This enables CORS for all routes
 
-model = joblib.load('svm_model.pkl')
+model = joblib.load('Model.joblib')
 
 @app.route('/predict', methods=['POST'])
 def predict():
