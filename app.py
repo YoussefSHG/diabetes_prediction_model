@@ -4,10 +4,10 @@ import joblib
 import numpy as np
 import os
 
-app = Flask(_name_)
-CORS(app, resources={r"/": {"origins": ""}})  # Allow any origin
+app = Flask(__name__)
+CORS(app)  # <-- This enables CORS for all routes
 
-model = joblib.load('Model.joblib')
+model = joblib.load('svm_model.pkl')
 
 @app.route('/predict', methods=['POST'])
 def predict():
@@ -16,5 +16,5 @@ def predict():
     prediction = model.predict([input_features])
     return jsonify({'prediction': prediction.tolist()})
 
-if _name_ == '_main_':
-    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
