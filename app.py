@@ -4,8 +4,8 @@ import joblib
 import numpy as np
 import os
 
-app = Flask(__name__)
-CORS(app)  # <-- This enables CORS for all routes
+app = Flask(_name_)
+CORS(app, resources={r"/": {"origins": ""}})  # Allow any origin
 
 model = joblib.load('Model.joblib')
 
@@ -16,5 +16,5 @@ def predict():
     prediction = model.predict([input_features])
     return jsonify({'prediction': prediction.tolist()})
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
+if _name_ == '_main_':
+    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
